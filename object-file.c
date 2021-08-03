@@ -2725,7 +2725,7 @@ struct oidtree *odb_loose_cache(struct object_directory *odb,
 
 	if (subdir_nr < 0 ||
 	    subdir_nr >= bitsizeof(odb->loose_objects_subdir_seen))
-		BUG("subdir_nr out of range");
+		BUG("subdir_nr out of range (%d vs %d)", subdir_nr, bitsizeof(odb->loose_objects_subdir_seen));
 
 	bitmap = &odb->loose_objects_subdir_seen[word_index];
 	if (*bitmap & mask)
@@ -2751,7 +2751,7 @@ void odb_loose_cache_add_new_oid(struct object_directory *odb,
 
 	if (subdir_nr < 0 ||
 	    subdir_nr >= ARRAY_SIZE(odb->loose_objects_subdir_seen))
-		BUG("subdir_nr out of range");
+		BUG("subdir_nr out of range (%d vs %d)", subdir_nr, bitsizeof(odb->loose_objects_subdir_seen));
 
 	/*
 	 * If the looose object cache already has an oid_array covering
